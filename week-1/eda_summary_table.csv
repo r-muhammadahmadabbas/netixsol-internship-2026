@@ -1,0 +1,11 @@
+Metric,Value
+Total Samples,48842
+Positive Class (>50K),11687
+Negative Class (<=50K),37155
+Base Rate (% >50K),23.93%
+Age Mean,38.6
+Education-num Mean,10.1
+Hours/Week Mean,40.4
+Workclass: Private %,69.4%
+Education: HS-grad %,32.3%
+Native-Country: US %,89.7%
