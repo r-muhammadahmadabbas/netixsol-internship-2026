@@ -1,0 +1,61 @@
+📌 Scenario
+You'll work with the UCI "Adult" (Census Income) dataset to predict whether a person earns >50K/year. This mirrors real business problems like targeted marketing or credit risk screening.
+Today's goal: set up a reproducible train/hold-out split, build simple baselines, and do an initial error analysis to guide the week's modeling work.
+
+Task 1: Problem Definition & Success Metric
+Define the target: income >50K = positive class. State a realistic business objective (e.g., maximize precision among contacted users to avoid wasted outreach).
+Compute the class base rate (% of positives) and pick ONE primary evaluation metric (F1, precision@top-k, or ROC AUC). Explain the trade-off — why precision over recall (or vice versa)?
+Write 2–3 short sentences explaining the goal and chosen metric — written for a non-technical stakeholder.
+
+Task 2: Data Load & Quick EDA
+Load the Adult dataset (sklearn.datasets.fetch_openml('adult') or UCI repo). Convert target to binary 0/1.
+Clean missing values — the dataset uses '?' → convert to NaN.
+Run basic EDA:
+Data shape & column types
+Numeric summaries
+Value counts for categorical columns
+Visualizations (histograms + bar plots)
+Save a summary table showing positive/negative class counts and at least 3 notable feature distributions.
+
+Task 3: Create Reproducible Splits
+Create a hold-out test set (~20% of data), stratified on the target, with a fixed random_state. ⚠️ This set is only for final evaluation — don't touch it before that.
+(Optional) Split the remaining 80% into a dev set (~10%) and training set for faster experimentation.
+In 2–3 sentences, explain why a hold-out test is necessary and what goes wrong if you use it during hyperparameter tuning.
+
+Task 4: Implement Simple Baselines
+Build two baselines:
+Majority-class predictor — always predicts the most frequent class.
+Single-feature rule-based classifier — e.g., education-num ≥ 13 or capital-gain > 0. Justify your chosen rule.
+Evaluate both baselines on the hold-out test set. Report a metrics table with: accuracy, precision, recall, F1, ROC AUC, PR AUC + a confusion matrix for each.
+Write a 3–4 sentence interpretation: Which baseline wins, and why? What's the minimum improvement a real model would need to be considered "useful"?
+
+Task 5: Initial Error Analysis & Next Steps
+Sample ≥10 false positives and ≥10 false negatives. Look for patterns (e.g., "many false negatives are younger individuals with high hours/week").
+List 4–6 concrete data/feature issues to fix tomorrow (e.g., missing categories, encoding, skewed numerics).
+End with one paragraph naming the primary metric to optimize for the rest of the week — back it up with your baseline numbers.
+
+📦 Deliverable
+A clean, reproducible Jupyter notebook
+A 1-page PDF summary covering: problem framing → chosen metric → baseline results → error analysis
+
+
+Here's where you can get the UCI Adult (Census Income) dataset:
+
+Easiest option — directly in code:
+
+python
+from sklearn.datasets import fetch_openml
+adult = fetch_openml('adult', version=2, as_frame=True)
+df = adult.frame
+This pulls it straight from OpenML (mirrors the UCI dataset) with no manual download needed — sklearn caches it locally after the first fetch.
+
+Direct sources if you want the raw files:
+
+UCI ML Repository (original source): https://archive.ics.uci.edu/dataset/2/adult — gives you adult.data, adult.test, and adult.names (column descriptions)
+OpenML page (what sklearn pulls from): https://www.openml.org/d/1590
+Kaggle mirror (if you prefer a CSV with headers already set): search "Adult Census Income" on Kaggle — commonly adult.csv
+A couple of practical notes for Task 2 in your assignment:
+
+The raw UCI files use " ?" (with a leading space) for missing values, not just "?" — so when cleaning, use df.replace(' ?', np.nan) or strip whitespace first, or you'll miss them.
+The raw adult.test file has a trailing period after the target labels (e.g., >50K. vs >50K) — a classic gotcha that breaks label matching if you concatenate train and test naively. Using fetch_openml avoids this since it's already cleaned.
+Column names aren't in the raw data files — they're in adult.names. fetch_openml(as_frame=True) gives you proper column names automatically.
