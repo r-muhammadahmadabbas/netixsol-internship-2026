@@ -1,0 +1,68 @@
+============================================================
+DAY 2 TASK — WEEK 1 (NetixSol Internship)
+============================================================
+
+SCENARIO
+Using the same Adult dataset and hold-out test from Day 1, build
+your first real supervised models with solid preprocessing.
+
+Focus areas: repeatable pipelines (no data leakage), correct
+preprocessing for mixed data (categorical + numeric), and comparing
+simple classifiers to pick candidates for improvement.
+
+
+TASK 1: Preprocessing Plan & Implementation
+- List your numeric and categorical features explicitly.
+  Replace '?' with NaN if not already done.
+- Build a sklearn ColumnTransformer pipeline:
+    Numeric pipeline: SimpleImputer (median) -> StandardScaler
+    Categorical pipeline: SimpleImputer (most_frequent/"Missing")
+      -> OneHotEncoder(handle_unknown='ignore')
+- In comments, explain why you chose median imputation + OneHotEncoder,
+  and note alternatives you considered but skipped.
+
+
+TASK 2: Train Two Supervised Models (in Pipelines)
+- Build preprocessing + estimator pipelines for:
+    Logistic Regression — set random_state, use a solver that
+      supports regularization
+    Decision Tree Classifier — set random_state
+- Fit both on the training set only.
+  DO NOT touch the hold-out test set here.
+
+
+TASK 3: Evaluate on Hold-Out Test (Multiple Metrics)
+- For each model, compute: accuracy, precision, recall, F1,
+  ROC AUC, PR AUC. Build a clear comparison table including
+  your Day 1 baseline.
+- Plot ROC curves and Precision-Recall curves for both models.
+- Build confusion matrices for both — which error type is more
+  common (false positives vs false negatives), and how does that
+  affect your chosen metric/decision?
+
+
+TASK 4: Interpretability Check
+- Logistic Regression:
+    Map coefficients back to feature names (use
+    get_feature_names_out for one-hot columns).
+    List the top 10 positive and top 10 negative coefficients
+    with a short interpretation of each.
+- Decision Tree:
+    Report tree depth and train vs. test score (to check for
+    overfitting).
+    Print/export the top 3 splits. Comment on whether the tree's
+    logic seems sensible.
+
+
+TASK 5: Write-Up & Model Selection for Day 3
+- Write 1-2 paragraphs justifying which model(s) you'll develop
+  further (e.g., logistic for interpretability, tree for
+  nonlinearity) — back this up with your metrics.
+- Save your preprocessing pipeline code for reuse. Note any
+  preprocessing changes you plan to test tomorrow.
+
+
+DELIVERABLE
+- A Jupyter notebook
+- A 1-2 page write-up comparing preprocessing choices and model
+  metrics, stating which model(s) you're continuing with
