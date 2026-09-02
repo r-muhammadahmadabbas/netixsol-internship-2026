@@ -1,0 +1,40 @@
+Day 3 — Feature Engineering + Cross-Validation
+================================================
+
+📌 Scenario
+Today you'll expand the feature set with principled feature engineering and use cross-validation to compare models more reliably. Goal: find features that materially improve performance, and get statistically believable performance estimates before tuning.
+
+Task 1: Create & Justify Engineered Features
+Propose and build at least 6 new features. Examples:
+- Age buckets
+- Hours-per-week bins
+- Flag: capital_gain > 0
+- log(capital_gain + 1)
+- Higher-education boolean
+- Interaction: education_num × hours_per_week
+For each feature, give a one-line justification (why it might help) + a univariate predictive score (e.g., mutual_info_classif or grouped mean of target).
+Keep a feature dictionary: name, type, creation rule, predictive signal.
+
+Task 2: Rebuild Pipeline with Engineered Features
+Integrate the new features cleanly into your preprocessing pipeline (FunctionTransformer or similar).
+⚠️ No information leakage — features must use only current-row data. No target-encoding yet.
+
+Task 3: Cross-Validated Model Comparison
+Use StratifiedKFold (k=5) to cross-validate at least 3 models with identical preprocessing:
+- LogisticRegression
+- RandomForestClassifier
+- GradientBoosting (HistGradientBoosting / XGBoost / LightGBM)
+Report mean ± std for your primary metric, plus ROC AUC and F1.
+Visualize with boxplots of fold scores.
+
+Task 4: Statistical Comparison & Feature Importance
+Run a paired statistical test (paired t-test or Wilcoxon) between your top 2 models on the chosen metric. Report p-values and interpret practically — is the difference actually meaningful?
+Report feature importances (tree-based model) and coefficients (Logistic Regression) for the engineered features. Which engineered features mattered most — and does that make sense?
+
+Task 5: Feature Selection / Dimensionality Check
+Try a simple feature-selection step (SelectKBest with mutual information, or L1-based selection). Measure the change in cross-validated performance and training time.
+Decide which features to keep for tomorrow's hyperparameter tuning — with a short rationale.
+
+📦 Deliverable
+- A notebook
+- A 2-page summary with: engineered feature list → CV comparison plots/tables → statistical test results → recommended models/features for tuning
