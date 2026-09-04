@@ -1,0 +1,78 @@
+Day 5 — Production-Ready ML Project (Final Day)
+================================================
+
+Scenario
+Your model has been tuned and evaluated. On the final day, you will turn your best-performing
+solution into a complete, production-ready machine learning project. You will perform a final
+validation, analyze model behavior, document limitations, prepare inference functionality, and
+present the complete project with reproducible results.
+
+Task 1: Final Model Validation
+- Load the saved pipeline/artifact from Day 4.
+- Verify that the complete pipeline works correctly on unseen data.
+- Re-run the final evaluation using the untouched test set.
+- Report: Accuracy, Precision, Recall, F1-score, ROC-AUC / PR-AUC where applicable, Brier score.
+- Create a final metrics table comparing the shortlisted models with the selected final model.
+- Confirm that no data leakage exists between training, validation, and test data.
+
+Task 2: Model Behavior & Error Analysis
+- Perform a detailed analysis of the final model's predictions.
+- Generate the confusion matrix.
+- Identify false positives and false negatives.
+- Analyze common patterns in incorrect predictions.
+- If applicable, inspect model performance across important subgroups or categories.
+- Identify: where the model performs well, where it struggles, which type of error is more costly.
+- Suggest practical improvements based on the observed errors.
+
+Task 3: Feature & Model Interpretation
+- Explain why the final model makes its predictions.
+  - Logistic Regression -> analyze coefficients.
+  - Tree-based model -> analyze feature importance.
+  - Other models -> use an appropriate interpretation method.
+- Create visualizations showing the most important features.
+- Write a short explanation of top influential features, their expected relationship with
+  predictions, and any surprising or potentially problematic findings.
+
+Task 4: Production-Ready Inference
+- Create a simple inference workflow using the saved pipeline.
+- The inference code should: load the artifact, accept new input data, apply the same
+  preprocessing automatically, generate prediction probabilities, apply the selected
+  classification threshold, and return the final prediction.
+- Test the inference pipeline using at least 5-10 new/unseen examples.
+- The inference process must NOT manually repeat preprocessing already included in the pipeline.
+
+Task 5: Final Project Documentation
+- Create a concise project README/documentation containing: project objective, dataset
+  description, target variable, feature engineering, preprocessing steps, models tested,
+  hyperparameter tuning approach, best parameters, selected final model, classification
+  threshold, final test performance, important features, known limitations, how to reproduce
+  training, how to run inference. Also document Python/library versions used.
+
+Task 6: Final Project Report & Presentation
+- Prepare a final 2-3 page project report covering the complete Week 1 workflow, including:
+  1. Problem Definition
+  2. Data Preparation
+  3. Model Development
+  4. Model Tuning
+  5. Diagnostics
+  6. Final Results
+  7. Model Interpretation
+  8. Production Readiness
+  9. Limitations & Future Improvements
+
+Deliverables (submit by end of Day 5)
+- final_model.joblib / final_model.pkl
+- Final Jupyter notebook
+- README.md
+- Final 2-3 page project report
+- Final metrics table
+- Confusion matrix
+- Learning/calibration curves
+- Feature-importance/model-interpretation visualization
+- Working inference example
+- requirements.txt or equivalent environment/version information
+
+Week 1 Final Outcome
+Data -> Preprocessing -> Baseline Models -> Evaluation -> Hyperparameter Tuning ->
+Regularization -> Calibration -> Threshold Selection -> Final Validation -> Interpretation ->
+Saved Pipeline -> Inference -> Documentation
