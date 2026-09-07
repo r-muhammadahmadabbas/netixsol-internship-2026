@@ -1,0 +1,68 @@
+Week 2 — Day 1: Agent Foundations — Reasoning Loops, Tool Calling & Raw Python Agents
+=======================================================================================
+
+Scenario
+--------
+Before touching any framework, interns need to understand what an "agent" actually is
+under the hood: an LLM in a loop that reasons, calls tools, observes results, and
+decides what to do next. Today you'll build a minimal agent from scratch in raw Python
+using the Anthropic API — no LangChain, no LangGraph — so tomorrow's frameworks feel
+like conveniences, not magic.
+
+Task 1: Agent Concepts & Mental Model
+--------------------------------------
+Define in your own words: agent vs. chatbot vs. workflow. What makes something "agentic"
+(autonomy, tool use, multi-step planning, self-correction)?
+
+Explain the ReAct pattern (Reason → Act → Observe → repeat) with a simple diagram or pseudocode.
+
+Write 2–3 sentences on when an agent is overkill (a simple prompt or script would do) —
+this judgment matters as much as building one.
+
+Task 2: Tool Calling Fundamentals
+----------------------------------
+Using the Anthropic API's tool use (function calling) feature, define at least 2 simple
+tools (e.g., a calculator, a weather lookup stub, a text file reader).
+
+Write proper JSON schemas for each tool — name, description, input_schema. Explain why
+tool descriptions matter for reliable calling.
+
+Send a single request where the model chooses a tool, then manually execute the tool
+and return the result as a tool_result block.
+
+Task 3: Build a Minimal Agent Loop
+-----------------------------------
+Implement a Python while-loop agent: send message → check if response contains tool_use →
+execute tool → append tool_result → repeat until the model returns a final text answer.
+
+Add a max_iterations safeguard to prevent infinite loops.
+
+Test it on a multi-step task that requires 2+ tool calls (e.g., "look up the weather in
+two cities and tell me which is warmer").
+
+Task 4: Memory & State Handling
+--------------------------------
+Explain the difference between conversation memory (message history) and working memory
+scratchpad/state the agent tracks mid-task).
+
+Add simple logging that prints each reasoning step, tool call, and observation — this
+becomes your debugging habit for every framework going forward.
+
+Task 5: Failure Modes & Guardrails
+-----------------------------------
+Deliberately break your agent: give it an ambiguous request, a tool that returns an error,
+or a task requiring a tool you haven't defined. Observe and document what happens.
+
+List 4–6 concrete failure modes (infinite loops, hallucinated tool calls, wrong tool
+arguments, silent errors) and one mitigation for each.
+
+End with a short paragraph: why do frameworks like LangChain/LangGraph/CrewAI exist,
+given you just built this by hand?
+
+Deliverables
+------------
+- A clean, reproducible Jupyter notebook or Python script with your raw-Python agent
+- A short write-up (1 page) covering the ReAct loop, tool schemas used, and failure modes observed
+
+Primary API: Anthropic API (tool use / function calling)
+Framework: Raw Python only — no LangChain, no LangGraph, no CrewAI
