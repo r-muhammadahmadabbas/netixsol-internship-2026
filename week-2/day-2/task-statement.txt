@@ -1,0 +1,47 @@
+Week 2 — Day 2: LangChain — Tools, Chains, Memory & Your First Framework Agent
+=======================================================================================
+
+Scenario
+--------
+Today you rebuild yesterday's agent using LangChain, and go further — chaining prompts, adding real memory, and giving the agent access to multiple tools including one that touches external data (a file or API). Goal: understand what LangChain automates for you, and where it adds complexity you should be aware of.
+
+Task 1: LangChain Setup & Core Concepts
+----------------------------------------
+Install and set up langchain + langchain-anthropic. Map LangChain concepts to yesterday's raw-Python equivalents: LLM wrapper, Tool, AgentExecutor, Memory.
+
+Build a simple LLMChain or use the modern LCEL (LangChain Expression Language) syntax for a basic prompt → response pipeline.
+
+In 2–3 sentences, explain what LCEL's pipe (|) syntax is doing under the hood.
+
+Task 2: Define & Register Tools
+--------------------------------
+Recreate at least 3 tools using LangChain's @tool decorator (or Tool class): reuse 1–2 from Day 1, and add one new tool that reads from a real data source (a CSV file, a small local JSON "database," or a public API).
+
+Write clear docstrings — explain how tool docstrings function as part of the prompt.
+
+Task 3: Build an Agent with create_tool_calling_agent / AgentExecutor
+----------------------------------------------------------------------
+Assemble an agent using LangChain's agent constructor + AgentExecutor, wiring in your tools.
+
+Set verbose=True and capture the full reasoning trace for one multi-step run. Annotate the trace: where did it reason, act, observe?
+
+Compare this trace to your raw-Python agent's log from Day 1 — what's similar, what's hidden from you now?
+
+Task 4: Add Memory
+-------------------
+Integrate conversation memory (e.g., ConversationBufferMemory or the modern RunnableWithMessageHistory) so the agent can handle a 3-turn conversation with follow-up questions that depend on earlier context.
+
+Test with a scenario like: "Find the price of X" → "Now compare it to Y" → "Which one should I recommend to a budget-conscious client?"
+
+Task 5: Structured Output & Error Handling
+-------------------------------------------
+Force the agent's final answer into a structured format (Pydantic model or JSON schema) using LangChain's structured output support.
+
+Add basic error handling for tool failures (a tool that sometimes throws an exception) — how does the agent recover, and what did you have to configure to make that graceful?
+
+Write 3–4 sentences: what did LangChain make easier vs. Day 1's raw agent, and what abstraction leakiness or "magic" did you notice?
+
+Deliverable
+-----------
+A Jupyter notebook with a working LangChain agent (tools + memory + structured output)
+A 1-page write-up comparing raw-Python vs. LangChain agent, with an annotated reasoning trace
