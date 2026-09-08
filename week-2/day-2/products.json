@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "name": "laptop",
+      "price": 999,
+      "category": "electronics",
+      "stock": 15
+    },
+    {
+      "name": "phone",
+      "price": 699,
+      "category": "electronics",
+      "stock": 30
+    },
+    {
+      "name": "tablet",
+      "price": 449,
+      "category": "electronics",
+      "stock": 20
+    },
+    {
+      "name": "headphones",
+      "price": 149,
+      "category": "accessories",
+      "stock": 50
+    },
+    {
+      "name": "smartwatch",
+      "price": 299,
+      "category": "wearables",
+      "stock": 25
+    }
+  ]
+}
