@@ -1,6 +1,6 @@
 # Week 2 — Day 2: LangChain — Tools, Chains, Memory & Your First Framework Agent
 
-## Status: 🔄 IN PROGRESS
+## Status: ✅ COMPLETE
 
 ## What We'll Do Today
 
@@ -18,11 +18,11 @@ Goal: Understand what LangChain automates vs. where it adds hidden complexity.
 
 | Task | Description | Status |
 |------|-------------|--------|
-| 1 | LangChain Setup & Core Concepts (LLM wrapper, Tool, AgentExecutor, Memory mapping; LCEL pipe syntax) | ⏳ |
-| 2 | Define & Register Tools (@tool decorator, 3+ tools, one real data source, docstrings as prompt) | ⏳ |
-| 3 | Build Agent with create_tool_calling_agent + AgentExecutor (verbose trace, annotate Reason/Act/Observe) | ⏳ |
-| 4 | Add Memory (ConversationBufferMemory / RunnableWithMessageHistory, 3-turn conversation test) | ⏳ |
-| 5 | Structured Output & Error Handling (Pydantic output, tool failure recovery, comparison write-up) | ⏳ |
+| 1 | LangChain Setup & Core Concepts (LLM wrapper, Tool, AgentExecutor, Memory mapping; LCEL pipe syntax) | ✅ |
+| 2 | Define & Register Tools (@tool decorator, 3+ tools, one real data source, docstrings as prompt) | ✅ |
+| 3 | Build Agent with create_tool_calling_agent + AgentExecutor (verbose trace, annotate Reason/Act/Observe) | ✅ |
+| 4 | Add Memory (ConversationBufferMemory / RunnableWithMessageHistory, 3-turn conversation test) | ✅ |
+| 5 | Structured Output & Error Handling (Pydantic output, tool failure recovery, comparison write-up) | ✅ |
 
 ---
 
