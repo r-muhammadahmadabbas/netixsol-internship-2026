@@ -1,0 +1,69 @@
+Week 2 — Day 3: LangGraph — Stateful, Multi-Step & Cyclical Agent Workflows
+================================================================================
+
+Scenario
+--------
+Real agent workflows aren't a single loop — they branch, loop back, and need
+explicit control over state. Today you move to LangGraph, which models agents
+as graphs of nodes (steps) and edges (transitions), giving you far more control
+than a plain AgentExecutor.
+
+Task 1: Graph Concepts & State Design
+--------------------------------------
+Explain LangGraph's core building blocks: StateGraph, nodes, edges, conditional
+edges, and the shared State object.
+
+Design a State schema (TypedDict or Pydantic model) for a concrete workflow of
+your choice (e.g., a research assistant that searches, drafts, critiques, and
+revises an answer).
+
+Draw (diagram or ASCII) the graph you're about to build before coding it — nodes
+and transitions.
+
+Task 2: Build a Linear Graph
+-----------------------------
+Implement a simple 3–4 node linear graph (e.g., plan → retrieve → generate →
+format) using your Day 2 tools where relevant.
+
+Compile and run the graph on a sample input, printing state after each node to
+verify it updates correctly.
+
+Task 3: Add Conditional Edges & Cycles
+---------------------------------------
+Introduce a conditional edge — e.g., a "critique" node that routes back to
+"generate" if quality is below a threshold, or forward to "finish" if acceptable.
+This creates a self-correction loop.
+
+Add a max-retries counter in state to prevent infinite cycles, and log each pass
+through the loop.
+
+Explain in 2–3 sentences why this loop-back pattern is hard to express cleanly
+in a plain AgentExecutor but natural in LangGraph.
+
+Task 4: Human-in-the-Loop & Interrupts
+---------------------------------------
+Add an interrupt point (LangGraph's interrupt_before / interrupt_after or
+checkpointer-based pause) where the graph pauses for human approval before a
+"risky" action (e.g., sending an email, making a purchase call).
+
+Demonstrate resuming the graph after simulated human approval/rejection.
+
+Discuss: when should a real product require human-in-the-loop for an agent, and
+when is full autonomy acceptable?
+
+Task 5: Persistence & Debugging
+--------------------------------
+Add a checkpointer (e.g., MemorySaver) so the graph's state persists across
+runs/sessions. Show resuming a paused conversation.
+
+Use LangGraph's built-in state history / time-travel (or manual state snapshots)
+to demonstrate replaying/debugging one run.
+
+Write a short comparison: LangChain AgentExecutor vs. LangGraph — when would you
+reach for each in a real project?
+
+Deliverable
+-----------
+- A Jupyter notebook with a working LangGraph agent (conditional edges, a
+  self-correction loop, human-in-the-loop interrupt, persistence)
+- A graph diagram (image or Mermaid) of your final workflow
