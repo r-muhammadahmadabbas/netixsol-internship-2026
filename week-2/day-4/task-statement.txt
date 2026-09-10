@@ -1,0 +1,70 @@
+Week 2 Day 4 — CrewAI — Multi-Agent Collaboration, Roles & Task Delegation
+================================================================================
+
+Scenario
+--------
+Some problems are better solved by a team of specialized agents than one
+generalist. Today you use CrewAI to design a small "crew" of agents with
+distinct roles, goals, and tools that collaborate on a shared objective —
+mirroring how you'd delegate work across specialists on a real team.
+
+Task 1: Multi-Agent Design Thinking
+-------------------------------------
+Pick a realistic multi-step business task (e.g., "research a competitor,
+summarize findings, and draft a marketing angle" or "review a dataset,
+generate insights, and write a stakeholder-ready summary").
+
+Decompose it into 3 distinct agent roles with clear responsibilities — avoid
+overlap. For each: define role, goal, and backstory (CrewAI's framing for
+persona/context).
+
+Explain in 2–3 sentences why multiple specialized agents might outperform one
+generalist agent on this task — and where that isn't true.
+
+Task 2: Build Agents & Assign Tools
+-------------------------------------
+Implement your 3 agents in CrewAI, each with its own LLM config and 1–2
+relevant tools (reuse from earlier days or CrewAI's built-in tools, e.g.,
+search or file tools).
+
+Keep tool access role-appropriate — don't give every agent every tool.
+Justify each assignment.
+
+Task 3: Define Tasks & Process
+-------------------------------
+Write CrewAI Task objects for each agent: clear description, expected_output,
+and context dependencies (later tasks depending on earlier tasks' outputs).
+
+Assemble the Crew and run it with Process.sequential. Capture and review the
+full execution log.
+
+Note one place where a task's output wasn't in the format the next agent
+needed — how did you fix the prompt/expected_output to solve it?
+
+Task 4: Try Hierarchical Delegation
+-------------------------------------
+Rebuild (or extend) your crew using Process.hierarchical with a manager agent
+that delegates and reviews sub-agent work.
+
+Compare sequential vs. hierarchical runs on the same task: quality of output,
+latency/cost (token usage), and reliability.
+
+Write a short table: sequential vs. hierarchical — pros, cons, when to use
+each.
+
+Task 5: Evaluation & Cost Awareness
+-------------------------------------
+Log token usage and approximate cost per run (sequential vs. hierarchical, and
+vs. your single-agent LangGraph solution from Day 3 if applicable).
+
+Define 3 simple success criteria for your crew's output (e.g., factual
+grounding, completeness, tone) and manually score 3 runs against them.
+
+Write 3–4 sentences: for this specific task, was a multi-agent crew worth the
+added complexity and cost compared to a single well-designed agent?
+
+Deliverable
+-----------
+- A Python script/notebook with a working CrewAI crew (sequential and
+  hierarchical versions)
+- A short comparison: sequential vs hierarchical
