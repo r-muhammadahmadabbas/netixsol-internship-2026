@@ -16,4 +16,4 @@
 ## Architecture Overview
 - **Framework:** Hybrid (LangGraph + CrewAI concepts)
 - **Use Case:** Client Inquiry Qualification Agent for Web3Geeks
-- **Flow:** Validate → Research → Qualify → Draft → Human Approve → Send
+- **Flow:** Validate → Research → Qualify → Draft → Human Approve → Send.
