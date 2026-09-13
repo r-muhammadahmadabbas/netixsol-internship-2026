@@ -2,8 +2,8 @@
 
 ## Status
 - [ ] Task 1: System Design
-- [ ] Task 2: Build End-to-End System
-- [ ] Task 3: Evaluation Framework
+- [ ] Task 2: Build End-to-End System.
+- [ ] Task 3: Evaluation Framework.
 - [ ] Task 4: Wrap as API & Monitoring.
 - [ ] Task 5: Final Deliverables.
 
