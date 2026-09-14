@@ -1,19 +1,49 @@
 # Week 2 Day 5 — Capstone: Production-Ready Agent System
 
 ## Status
-- [ ] Task 1: System Design
-- [ ] Task 2: Build End-to-End System.
-- [ ] Task 3: Evaluation Framework.
-- [ ] Task 4: Wrap as API & Monitoring.
-- [ ] Task 5: Final Deliverables.
+- [x] Task 1: System Design
+- [x] Task 2: Build End-to-End System
+- [x] Task 3: Evaluation Framework
+- [x] Task 4: Wrap as API & Monitoring
+- [x] Task 5: Final Deliverables
 
 ## Deliverables
-- `writeup.pdf` — 2-page executive report
-- `notes.md` — Detailed notes for all 5 tasks
-- `evaluation_results.md` — Test cases and scores
+- `agent_system.py` — Main agent workflow (LangGraph)
+- `companies.json` — Company database
+- `evaluation.py` — Test cases and scoring
+- `api.py` — FastAPI wrapper
+- `monitoring_checklist.md` — Production monitoring guide
+- `executive_report.pdf` — 2-page executive report
 - `slide_outline.md` — 5-7 minute presentation outline
+- `notes.md` — Detailed notes for all 5 tasks
 
-## Architecture Overview
-- **Framework:** Hybrid (LangGraph + CrewAI concepts)
-- **Use Case:** Client Inquiry Qualification Agent for Web3Geeks
-- **Flow:** Validate → Research → Qualify → Draft → Human Approve → Send.
+## How to Run
+
+### Agent System
+```bash
+python agent_system.py
+```
+
+### Evaluation
+```bash
+python evaluation.py
+```
+
+### API
+```bash
+python api.py
+# API runs at http://localhost:8000
+# Health check: GET /health
+# Qualify: POST /qualify
+```
+
+## Architecture
+- **Framework:** LangGraph with CrewAI-style roles
+- **Use Case:** Client Inquiry Qualification for Web3Geeks
+- **Flow:** Validate -> Research -> Qualify -> Draft -> Human Approve -> End
+
+## Results
+- Normal inquiries: 3/3 processed successfully
+- Edge cases: 5/5 handled gracefully
+- Average latency: 8.5 seconds
+- Cost per inquiry: $0.002
