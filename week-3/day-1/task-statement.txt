@@ -1,0 +1,35 @@
+Week 3 Day 1
+AFL Data Foundations — EDA, Feature Engineering & Prediction Targets
+
+https://drive.google.com/file/d/1BhywSxP6ssBTZ1sYax8OzrYY3xhoFks_/view?usp=sharing
+
+📌 Scenario You have a complete AFL dataset and two end goals: a domain-locked chat assistant and a prediction system (match winners, top players/goal-kickers). Before any modeling or agent-building, you need to deeply understand the data, define what "top player" and "team win" mean precisely, and engineer the features both the ML models and the chat agent will rely on all week.
+
+Task 1: Data Inventory & Understanding
+Load the full AFL dataset(s) and document every table/file: what each row represents (match, player-game, team-season, etc.), grain, and how tables join (match_id, player_id, team_id, season/round).
+Identify date ranges, number of seasons, teams, players covered. Flag any structural changes over time (e.g., team relocations/renames, rule changes affecting stats).
+Check data quality: missing values, duplicate rows, inconsistent team/player naming across tables, outliers in key stats (goals, disposals, etc.).
+
+Task 2: Define Prediction Targets Precisely
+Match winner: define target as home/away win/loss/draw (or margin) at the match level — decide which framing (classification vs. regression on margin) and justify.
+"Top player": define at least 2 versions — top disposal-getter, top goal-kicker, and/or a fantasy-points/Brownlow-style composite score. Write the exact formula for any composite metric.
+Write a short data dictionary (target name, definition, formula, level of aggregation) — this becomes the contract for Day 2's models.
+
+Task 3: Exploratory Data Analysis
+Analyze team win rates over time, home-ground advantage, and season/ladder trends.
+Analyze player-level distributions for your chosen "top player" metrics — who leads historically, how consistent is week-to-week performance, position-based differences (forward vs. midfielder vs. defender).
+Visualize at least 5 relationships relevant to prediction (e.g., recent form vs. win probability, rest days between matches, travel/interstate effect, weather if available).
+
+Task 4: Feature Engineering for Prediction
+Build rolling/form features: team win streaks, last-N-games average score, last-N-games player output — with strict care to only use information available before the match being predicted (no leakage from future games).
+Build head-to-head and contextual features: historical matchup record, venue, ladder position at time of match, days of rest.
+Keep a versioned feature table (e.g., parquet/CSV) with a feature dictionary — name, description, computation window, source columns.
+
+Task 5: Reproducible Train/Hold-Out Split
+Create a strict time-based split (train on earlier seasons, hold out the most recent season or last N rounds) — explain why a random split would leak future information in a time-series sports context.
+Document the split logic in a reusable function so every model this week uses identical splits.
+Write 3–4 sentences: what's the realistic ceiling for prediction accuracy here (sports outcomes are inherently noisy) — and why "perfect" accuracy would actually be a red flag for leakage?
+
+📦 Deliverable
+A clean, reproducible Jupyter notebook with EDA, feature engineering, and the versioned feature table
+A 1-page data dictionary + target definitions document
