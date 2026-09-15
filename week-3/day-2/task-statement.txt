@@ -1,0 +1,32 @@
+Week 3 Day 2
+Prediction Models — Match Winner & Top Player Models
+
+📌 Scenario With clean features and defined targets, today you build the two core ML models: a match-outcome predictor and a top-player predictor. These will later be exposed as callable tools to your chat agent.
+
+Task 1: Baseline Models
+Match winner baseline: majority-class (always predict home team win, or higher-ladder team) — evaluate on hold-out.
+Top player baseline: "last week's leader repeats" or season-average leader — evaluate on hold-out.
+Report baseline metrics clearly (accuracy/F1/ROC AUC for match winner; top-k accuracy or MAE for top player) — these are the bar every real model must beat.
+
+Task 2: Build the Match Winner Model
+Build a preprocessing + model pipeline (sklearn ColumnTransformer) using your Day 1 features. Train at least 2 model types (e.g., Logistic Regression + Gradient Boosting).
+Evaluate on the hold-out season/rounds: accuracy, F1, ROC AUC, calibration (Brier score) — calibration matters here since you'll want realistic win probabilities, not just labels.
+Pick a final model and justify the choice with metrics + interpretability trade-offs.
+
+Task 3: Build the Top Player Model
+Frame this as either (a) regression predicting each player's stat/score for the upcoming match, then ranking, or (b) a learning-to-rank approach. Justify your framing.
+Train and evaluate: for regression, report MAE/RMSE plus top-k hit rate (did your top-5 predicted players contain the actual top performer?). For ranking, report an appropriate ranking metric (NDCG or similar).
+Compare against the Day 2 Task 1 baseline — is the model meaningfully better?
+
+Task 4: Feature Importance & Sanity Checks
+Report feature importances/coefficients for both models. Do the top features make football sense (recent form, home ground, matchup history)? Flag anything suspicious (possible leakage).
+Run a "sniff test": pick 3 upcoming/held-out matches, manually reason through what you'd expect, then compare to model output. Note any big disagreements and investigate why.
+
+Task 5: Package Models as Callable Functions
+Wrap each model in a clean Python function/class with a simple interface, e.g., predict_match_winner(team_a, team_b, date) -> {winner, probability} and predict_top_player(match_id or team, stat_type) -> ranked list.
+Save both pipelines (joblib/pickle) and write a short "how to call" snippet for each — this is exactly the interface your LangChain/LangGraph tools will wrap on Day 4.
+Add basic input validation (unknown team name, missing player, date outside data range) with clear error messages.
+
+📦 Deliverable
+A notebook with both trained models, evaluation tables, and feature importance analysis
+Saved model artifacts (.pkl/.joblib) + a predict.py module with clean, documented functions ready to be turned into agent tools
