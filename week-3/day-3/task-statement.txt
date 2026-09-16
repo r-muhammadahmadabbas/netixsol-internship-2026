@@ -1,0 +1,32 @@
+Week 3 Day 3
+Domain-Scoped AFL Chat Agent — Retrieval, Guardrails & Grounding
+
+📌 Scenario Now build the conversational half: a chat assistant that only discusses AFL, grounds its answers in your real dataset (not hallucinated stats), and politely declines off-topic requests. This is where LangChain and retrieval come in — before adding prediction tools tomorrow.
+
+Task 1: Scope Definition & System Prompt Design
+Write a clear system prompt defining the assistant's scope: AFL teams, players, matches, stats, history, rules — and explicitly out-of-scope topics (other sports, general chit-chat, non-AFL trivia).
+Design the refusal behavior: how should it respond to an off-topic question? Draft 3 example refusal responses that redirect back to AFL rather than just shutting the conversation down.
+Test with 8–10 adversarial prompts (topic drift, "pretend you're not an AFL bot," indirect off-topic asks) and log pass/fail.
+
+Task 2: Build a Retrieval Layer Over Your AFL Data
+Decide what's retrieved via structured lookup (SQL/pandas query against your feature table — exact stats, records) vs. semantic retrieval (vector search over any text data like match reports/news if available). Justify the split — sports stats should be exact lookups, not fuzzy retrieval, to avoid hallucinated numbers.
+Implement at least 2 structured query tools (e.g., "get team X's record vs. team Y," "get player X's season stats") that pull directly from your dataset.
+If you have any unstructured text (articles, commentary), build a simple vector store (e.g., Chroma/FAISS) and a retrieval tool for it.
+
+Task 3: Wire Retrieval Tools into LangChain
+Register your structured + (optional) semantic retrieval tools as LangChain tools with clear docstrings/schemas.
+Build a LangChain agent (or LCEL chain with tool calling) that answers AFL questions by calling the correct tool rather than relying on the model's memory — test with questions where the honest answer requires a real lookup (e.g., "how many disposals did X have last round?").
+Add a grounding check: for stat-based answers, the number in the final response must trace back to a tool result — describe how you verified this (e.g., logging tool outputs vs. final answer).
+
+Task 4: Memory & Multi-Turn AFL Conversations
+Add conversation memory so users can ask follow-ups ("what about the round before that?", "how does that compare to his career average?") without repeating context.
+Test a realistic 4–5 turn conversation covering a team, then a player on that team, then a stat comparison — confirm context carries correctly.
+
+Task 5: Guardrail Evaluation
+Build a test set of 15+ prompts: mix of legitimate AFL questions, off-topic questions, and edge cases (AFL-adjacent but ambiguous, e.g., "what's the best sport?").
+Score the agent's responses: correctly scoped vs. leaked off-topic, and correctly grounded vs. hallucinated stats.
+Write a short report on failure patterns found and one fix per pattern (prompt tweaking, tool description improvement, additional refusal examples).
+
+📦 Deliverable
+A working LangChain-based AFL chat agent with structured (and optional semantic) retrieval tools, memory, and scope guardrails
+A guardrail evaluation report (test prompts → pass/fail → fixes applied)
