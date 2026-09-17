@@ -24,5 +24,5 @@ jupyter notebook
 ```
 
 ## Deliverables
-- Working LangChain AFL chat agent
+- Working LangChain AFL chat agent.
 - Guardrail evaluation report (test prompts → pass/fail)
