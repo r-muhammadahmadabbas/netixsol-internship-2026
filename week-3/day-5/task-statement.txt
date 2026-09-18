@@ -1,0 +1,32 @@
+Week 3 Day 5
+Capstone — Full AFL Assistant, Evaluation, Deployment & Presentation
+
+📌 Scenario Ship the complete product: a domain-locked AFL chat + prediction assistant, evaluated rigorously, wrapped behind an API/UI, with a monitoring plan and a stakeholder-ready presentation — as if this were going live on Web3Geeks or a client property.
+
+Task 1: System Hardening
+Review and tighten the full pipeline: consistent error handling across every node/tool, timeouts for slow tool calls, and consistent disclaimer language on all predictions (e.g., "predicted probability, not a certainty").
+Add basic rate/abuse handling considerations (repeated off-topic probing, prompt injection attempts trying to override the AFL-only scope) — test at least 3 prompt-injection style attempts and confirm the system holds its scope.
+
+Task 2: Comprehensive Evaluation
+Build a combined test suite (25+ cases) spanning: factual Q&A accuracy, prediction sanity (do probabilities move sensibly with obviously stronger/weaker matchups), scope guardrails, and conversational coherence across multi-turn chats.
+Score each case and summarize in a results table with pass rates per category. Identify the weakest category and propose one concrete improvement.
+Compare your match-winner model's real predictive performance against a simple public benchmark if available (e.g., ladder-position-based naive prediction) to contextualize how good "good enough" is.
+
+Task 3: Wrap as an API / Simple UI
+Expose the LangGraph app via a FastAPI endpoint (chat-style: accepts message + conversation_id, returns response + any prediction metadata).
+(Optional but recommended) Build a minimal chat UI (Streamlit or simple HTML/JS) so the assistant is demoable, not just callable via curl/Postman.
+Add structured logging: query, detected intent, tools called, latency, token usage — the foundation for monitoring.
+
+Task 4: Monitoring & Maintenance Plan
+Write a one-page monitoring checklist: what to track (response latency, tool error rate, off-topic leak rate, prediction accuracy drift as new rounds complete), alert thresholds, and cadence for re-evaluating/retraining prediction models as each new round's real results come in.
+Define a simple weekly retraining/refresh loop: how new match results feed back into the feature table and when models should be retrained.
+
+Task 5: Final Deliverables & Presentation
+Write a concise executive report (2 pages): product goal → architecture (chat + retrieval + prediction via LangGraph) → evaluation results → known limitations (data recency, model accuracy ceiling, guardrail edge cases) → recommended next steps.
+Prepare a short 5–7 minute demo script/slide outline: show a factual question, a prediction question, an off-topic refusal, and a multi-turn conversation live.
+
+📦 Deliverable
+Final codebase: LangGraph app + FastAPI wrapper (+ optional UI), clean and runnable
+Combined evaluation results table (25+ test cases → pass/fail by category)
+A 2-page executive report (PDF) + monitoring checklist
+A short demo script/slide outline for stakeholder presentation
