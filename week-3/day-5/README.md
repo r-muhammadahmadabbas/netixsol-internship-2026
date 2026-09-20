@@ -1,4 +1,4 @@
-# Week 3 Day 5 — Capstone: Full AFL Assistant, Evaluation, Deployment
+# Week 3 Day 5 — Capstone: Full AFL Assistant, Evaluation, Deployment.
 
 ## Overview
 Ship the complete product: domain-locked AFL chat + prediction assistant, evaluated, wrapped behind API/UI, with monitoring and stakeholder presentation.
