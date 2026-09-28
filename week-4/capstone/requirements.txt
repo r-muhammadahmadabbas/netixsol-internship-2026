@@ -1,0 +1,56 @@
+# Week 4 Capstone - AI Voice Agent for Real Estate
+# All local, free dependencies - no paid API keys required
+
+# Core
+fastapi==0.109.0
+uvicorn==0.27.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# LangGraph & LangChain
+langgraph==0.0.40
+langchain==0.1.16
+langchain-community==0.0.19
+langchain-core==0.1.52
+
+# Local LLM (Ollama)
+ollama==0.2.1
+
+# Vector Database
+chromadb==0.4.22
+
+# Database
+sqlalchemy==2.0.25
+aiosqlite==0.19.0
+
+# RAG & Embeddings
+sentence-transformers==2.2.2
+torch==2.1.2
+
+# Audio - Local STT/TTS
+faster-whisper==1.0.3
+piper-tts==1.2.0
+edge-tts==6.1.9
+
+# Audio processing
+pydub==0.25.1
+numpy==1.26.2
+
+# Web UI
+streamlit==1.31.0
+streamlit-webrtc==0.47.1
+
+# Utilities
+python-dotenv==1.0.0
+loguru==0.7.2
+httpx==0.26.0
+aiofiles==23.2.1
+
+# Data processing
+pandas==2.1.4
+
+# Scheduling (local simulation)
+apscheduler==3.10.4
+
+# Email (local simulation)
+# No external email service needed - we'll simulate
