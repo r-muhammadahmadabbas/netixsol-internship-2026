@@ -1,0 +1,64 @@
+Week 4 — Day 1: Foundations of AI Voice Agents & Conversation Design
+
+📌 Scenario: Before writing any code, design how a real estate voice salesperson behaves. Unlike a chatbot, a phone agent must interrupt naturally, respond quickly, recover from mistakes, sound empathetic, and guide the conversation toward booking a property visit.
+
+Task 1 — Research Modern Voice Agent Architecture
+Study and document:
+- Speech-to-Text pipeline
+- LLM reasoning
+- Tool calling
+- Retrieval
+- Memory
+- Text-to-Speech
+- Telephony
+- Workflow orchestration
+Create an architecture diagram.
+
+Task 2 — Design Conversation Flows
+Design complete conversation flows for:
+- Buyer inquiry
+- Rental inquiry
+- Commercial property inquiry
+- Investment inquiry
+- Returning customer
+- Appointment rescheduling
+- Appointment cancellation
+Create flowcharts.
+
+Task 3 — UrduLish Persona Engineering
+Design the AI personality. It should:
+- Sound Pakistani
+- Professional
+- Warm
+- Persuasive
+- Patient
+Example: "Assalam-o-Alaikum sir! RealEstate Hub se baat ho rahi hai. Main aap ki kis tarah madad kar sakta hoon?"
+Avoid robotic responses. Avoid translating directly from English.
+Design:
+- Greeting
+- Confirmations
+- Hesitation phrases
+- Acknowledgement phrases
+- Objection handling
+
+Task 4 — Fish Audio Evaluation
+Evaluate Fish Audio. Compare against ElevenLabs on:
+- Latency
+- Naturalness
+- Emotion
+- Streaming
+- Voice cloning
+- Pricing
+- Multilingual support
+- Urdu pronunciation
+- Urdu-English switching
+Conclude whether Fish Audio is the better choice.
+
+Task 5 — System Prompt
+Design a production-grade system prompt defining:
+- Scope
+- Goals
+- Guardrails
+- Persuasion rules
+- Appointment booking policy
+- Escalation rules

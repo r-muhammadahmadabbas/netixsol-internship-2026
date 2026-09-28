@@ -1,0 +1,54 @@
+Week 4 — Day 2: Knowledge Base, RAG & Property Intelligence
+
+📌 Scenario: The agent should never hallucinate property details. Every recommendation should come from verified company data.
+
+Task 1 — Design Knowledge Base
+Create datasets for:
+- Properties
+- Prices
+- Locations
+- Amenities
+- Schools
+- Nearby hospitals
+- Payment plans
+- Developers
+- FAQs
+
+Task 2 — Build RAG Pipeline
+Implement:
+- Document Loader
+- Chunking
+- Embedding
+- Vector Store
+- Retriever
+- Answer generation
+Evaluate different chunk sizes.
+
+Task 3 — Structured Retrieval
+Separate structured vs. semantic retrieval.
+Use SQL for:
+- Prices
+- Property availability
+- Plot sizes
+- Agent names
+Use vector retrieval for:
+- Brochures
+- Descriptions
+- FAQs
+Justify the split.
+
+Task 4 — Property Recommendation Engine
+Recommend properties based on:
+- Budget
+- City
+- Area
+- Bedrooms
+- Purpose
+- Amenities
+- Investment goals
+
+Task 5 — Hallucination Evaluation
+Create 20 questions. Measure:
+- Grounding Rate
+- Retrieval Accuracy
+- Hallucination Rate

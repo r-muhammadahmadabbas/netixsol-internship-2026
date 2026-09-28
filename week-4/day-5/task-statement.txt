@@ -1,0 +1,42 @@
+Week 4 — Day 5: LangGraph Orchestration & Tool Calling
+
+📌 Scenario: Transform the system into a true AI agent.
+
+Task 1 — LangGraph State Design
+State includes:
+- Conversation history
+- User profile
+- Property preferences
+- Budget
+- Intent
+- Tool outputs
+- Appointment status
+
+Task 2 — Graph Design
+Design a graph routing between:
+- Greeting
+- Intent Detection
+- RAG
+- Recommendation
+- Booking
+- Rescheduling
+- Cancellation
+- Email
+- Goodbye
+
+Task 3 — Tool Integration
+Wrap tools:
+- Search Property
+- Calendar
+- Email
+- CRM
+- Availability Checker
+- RAG Search
+
+Task 4 — Validation
+- Never book unavailable slots.
+- Never recommend unavailable properties.
+- Ask clarification instead of guessing.
+
+Task 5 — State Logging
+Log every node transition. Create annotated execution traces.
