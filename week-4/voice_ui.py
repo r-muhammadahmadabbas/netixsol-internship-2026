@@ -78,10 +78,23 @@ for idx, message in enumerate(st.session_state.messages):
                         audio_bytes = text_to_speech(message["content"])
                         if audio_bytes:
                             b64 = base64.b64encode(audio_bytes).decode()
-                            audio_html = f'<audio controls autoplay><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
+                            audio_html = f'<audio controls autoplay style="width:100%;height:40px;"><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
                             st.markdown(audio_html, unsafe_allow_html=True)
                 except Exception as e:
                     st.error(f"Audio error: {e}")
+
+# Voice Output Section (always visible)
+if st.session_state.messages and st.session_state.messages[-1]["role"] == "assistant":
+    st.markdown("---")
+    st.markdown("### 🔊 Agent Voice Response:")
+    try:
+        audio_bytes = text_to_speech(st.session_state.messages[-1]["content"])
+        if audio_bytes:
+            b64 = base64.b64encode(audio_bytes).decode()
+            audio_html = f'<audio controls autoplay style="width:100%;height:50px;"><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
+            st.markdown(audio_html, unsafe_allow_html=True)
+    except Exception as e:
+        logger.error(f"TTS error: {e}")
 
 # Text input (always works)
 if prompt := st.chat_input("Apna sawal yahan likhein..."):
@@ -102,13 +115,14 @@ if prompt := st.chat_input("Apna sawal yahan likhein..."):
                 response = result.get("response", "Maazrat, samajh nahi aaya.")
                 st.markdown(response)
                 
-                # Auto-play audio
+                # Auto-play audio prominently
                 try:
                     with st.spinner("Audio ban raha hai..."):
                         audio_bytes = text_to_speech(response)
                         if audio_bytes:
+                            st.markdown("### 🔊 Agent Response:")
                             b64 = base64.b64encode(audio_bytes).decode()
-                            audio_html = f'<audio controls autoplay><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
+                            audio_html = f'<audio controls autoplay style="width:100%;height:40px;"><source src="data:audio/mp3;base64,{b64}" type="audio/mp3"></audio>'
                             st.markdown(audio_html, unsafe_allow_html=True)
                 except Exception as e:
                     logger.error(f"TTS error: {e}")

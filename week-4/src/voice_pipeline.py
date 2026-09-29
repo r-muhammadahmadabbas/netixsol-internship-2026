@@ -81,40 +81,34 @@ def convert_audio_bytes(audio_data: bytes) -> bytes:
         return audio_data
 
 def transcribe_audio_deepgram(audio_data: bytes) -> str:
-    """Transcribe audio using Deepgram (better quality than Whisper)"""
+    """Transcribe audio using Deepgram"""
     if not DEEPGRAM_API_KEY:
         return ""
     
     try:
         import requests
-        import tempfile
-        import os
+        import io
         
-        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
-            f.write(audio_data)
-            temp_path = f.name
+        # Convert to WAV first
+        wav_data = convert_audio_bytes(audio_data)
         
-        try:
-            with open(temp_path, 'rb') as audio_file:
-                response = requests.post(
-                    "https://api.deepgram.com/v1/listen?language=ur&model=nova-2",
-                    headers={
-                        "Authorization": f"Token {DEEPGRAM_API_KEY}",
-                        "Content-Type": "audio/wav"
-                    },
-                    data=audio_file.read(),
-                    timeout=30
-                )
-            
-            if response.status_code == 200:
-                result = response.json()
-                text = result.get('results', {}).get('channels', [{}])[0].get('alternatives', [{}])[0].get('transcript', '')
-                return text.strip()
-            else:
-                logger.error(f"Deepgram error: {response.status_code}")
-                return ""
-        finally:
-            os.unlink(temp_path)
+        response = requests.post(
+            "https://api.deepgram.com/v1/listen?model=nova-3&language=ur&smart_format=true",
+            headers={
+                "Authorization": f"Token {DEEPGRAM_API_KEY}",
+                "Content-Type": "audio/wav"
+            },
+            data=wav_data,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            text = result.get('results', {}).get('channels', [{}])[0].get('alternatives', [{}])[0].get('transcript', '')
+            return text.strip()
+        else:
+            logger.error(f"Deepgram error: {response.status_code} - {response.text[:200]}")
+            return ""
             
     except Exception as e:
         logger.error(f"Deepgram transcription error: {e}")
@@ -132,25 +126,36 @@ def transcribe_audio(audio_data: bytes) -> str:
     return transcribe_audio_whisper(audio_data)
 
 def transcribe_audio_whisper(audio_data: bytes) -> str:
-    """Transcribe audio bytes to text using Whisper"""
+    """Transcribe audio bytes to text using Whisper - no ffmpeg needed"""
     if not is_whisper_available():
         logger.warning("Whisper not available")
         return ""
     
-    temp_input = None
-    
     try:
-        # Convert audio to WAV format using pydub (no ffmpeg needed)
-        wav_data = convert_audio_bytes(audio_data)
+        import numpy as np
+        from pydub import AudioSegment
+        import io
         
-        # Save to temp file
-        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
-            f.write(wav_data)
-            temp_input = f.name
+        # Load audio with pydub
+        audio = None
+        for fmt in ['wav', 'mp3', 'webm', 'ogg', 'm4a']:
+            try:
+                audio = AudioSegment.from_file(io.BytesIO(audio_data), format=fmt)
+                break
+            except:
+                continue
         
-        # Transcribe
+        if audio is None:
+            return ""
+        
+        # Convert to 16kHz mono numpy array (Whisper's expected format)
+        audio = audio.set_frame_rate(16000).set_channels(1)
+        samples = np.array(audio.get_array_of_samples(), dtype=np.float32)
+        samples = samples / 32768.0  # Normalize to [-1, 1]
+        
+        # Transcribe directly from numpy array (no file, no ffmpeg)
         model = get_whisper_model()
-        result = model.transcribe(temp_input, language="ur", fp16=False)
+        result = model.transcribe(samples, language="ur", fp16=False)
         text = result["text"].strip()
         
         if text:
@@ -160,13 +165,6 @@ def transcribe_audio_whisper(audio_data: bytes) -> str:
     except Exception as e:
         logger.error(f"Transcription error: {e}")
         return ""
-        
-    finally:
-        if temp_input and os.path.exists(temp_input):
-            try:
-                os.unlink(temp_input)
-            except:
-                pass
 
 def transcribe_audio_file(file_path: str) -> str:
     """Transcribe audio file to text"""
