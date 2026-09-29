@@ -15,5 +15,5 @@ __pycache__/
 Thumbs.db
 
 # API keys
-.env
-**/.env
+config.bat
+node_modules
